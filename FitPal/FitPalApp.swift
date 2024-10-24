@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FitPalApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+    @StateObject private var appState = AppState()  // Centralized state object
+
+       var body: some Scene {
+           WindowGroup {
+               MainView()
+                   .environmentObject(appState)  // Pass the AppState to the entire app
+           }
+       }
+   }

@@ -2,27 +2,25 @@
 //  FoodListView.swift
 //  FitPal
 //
-//  Created by Lavan Nithi on 2024-10-23.
+//  Created by Lavan Nithi on 2024-10-24.
 //
 
-import UIKit
 import SwiftUICore
 import SwiftUI
 
-struct FoodItem: View {
-    var food: Food
-    @State private var quantity = 0
-    
+struct FoodListView: View {
+    @StateObject var foodData = FoodData()
+
     var body: some View {
-        HStack {
-            Image(food.image)
-                .resizable()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-            Text(food.name)
-            Spacer()
-            Stepper(value: $quantity, in: 0...10) {
-                Text("\(quantity) servings")
+        List(foodData.foods) { food in
+            HStack {
+                Image(food.image)
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                Text(food.name)
+                Spacer()
+                Text("\(food.calories) cal")
             }
         }
     }
