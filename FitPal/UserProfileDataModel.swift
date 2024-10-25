@@ -5,12 +5,13 @@
 //  Created by Lavan Nithi on 2024-10-23.
 //
 
-struct UserProfile: Codable {
+struct UserProfile:Codable {
     var name: String
     var email: String
     var height: Double
     var currentWeight: Double
     var goalWeight: Double
-    var calorieGoal: Int
+    var calorieGoal: Double
+    var proteinGoal: Double
 }
 

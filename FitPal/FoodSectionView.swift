@@ -1,45 +1,38 @@
 //
-//  FoodListView.swift
+//  FoodSectionView.swift
 //  FitPal
 //
-//  Created by Lavan Nithi on 2024-10-24.
+//  Created by Lavan Nithi on 2024-10-25.
 //
 
 import SwiftUICore
 import SwiftUI
 
-struct FoodContentView: View {
-    @StateObject var foodData = FoodData()  // Use @StateObject in the top-level view
-
-    var body: some View {
-        VStack {
-            FoodListView(title: "Breakfast", foods: foodData.breakfast)
-            FoodListView(title: "Lunch", foods: foodData.lunch)
-            FoodListView(title: "Dinner", foods: foodData.dinner)
-        }
-    }
-}
-
-struct FoodListView: View {
+struct FoodSectionView: View {
     var title: String
-    var foods: [Food]  // Directly pass the food array for breakfast, lunch, or dinner
+    var foods: [Food]  // Array of foods for each meal
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
                 .font(.title2)
+                .bold()
                 .padding(.leading)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(foods) { food in
                         VStack {
-                            Image(food.image)  // Image name should match the asset catalog
+                            Image(food.image)  // Replace with actual image asset
                                 .resizable()
+                                .scaledToFit()
                                 .frame(width: 80, height: 80)
                                 .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                            
                             Text(food.name)
                                 .font(.subheadline)
+                                .multilineTextAlignment(.center)
                             Text("\(food.calories) cal")
                                 .font(.caption)
                                 .foregroundColor(.gray)

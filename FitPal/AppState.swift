@@ -8,16 +8,20 @@
 import SwiftUI
 
 class AppState: ObservableObject {
-    @Published var foods: [Food] = []
-    @Published var dailyCalories: Int = 0
-    @Published var userProfile: UserProfile = UserProfile(name: "John Doe", email: "john@example.com", height: 170.0, currentWeight: 70.0, goalWeight: 65.0, calorieGoal: 2000)
-    
-    // Functions to add calories or update user profile
-    func addCalories(_ calories: Int) {
-        dailyCalories += calories
-    }
-    
-    func updateProfile(_ profile: UserProfile) {
-        userProfile = profile
-    }
+    @Published var userProfile = UserProfile(
+        name: "John Doe",
+        email: "john@example.com",
+        height: 170.0,
+        currentWeight: 70.0,
+        goalWeight: 65.0,
+        calorieGoal: 2000,
+        proteinGoal: 100
+    )
+
+    @Published var foodData = FoodData()  // Initialize food data here
+    @Published var dailyCalories: Double = 1500  // Example calorie intake
+    @Published var dailyProtein: Double = 75     // Example protein intake
 }
+
+
+

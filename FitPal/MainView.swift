@@ -11,8 +11,7 @@ struct MainView: View {
     var body: some View {
         TabView {
             NavigationView {
-                CalorieTrackerView()
-                    .navigationTitle("Calories Tracker")
+                CaloriesTrackerView()
             }
             .tabItem {
                 Image(systemName: "flame.fill")

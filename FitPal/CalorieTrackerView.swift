@@ -1,43 +1,51 @@
-//
-//  CalorieTrackerView.swift
-//  FitPal
-//
-//  Created by Lavan Nithi on 2024-10-24.
-//
-
-import SwiftUICore
 import SwiftUI
 
-struct CalorieTrackerView: View {
-    @EnvironmentObject var appState: AppState  // Access the shared state
+struct CaloriesTrackerView: View {
+    @EnvironmentObject var appState: AppState  // Access user data for name
 
     var body: some View {
-        VStack {
-            List(appState.foods) { food in
-                HStack {
-                    Image(food.image)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                    Text(food.name)
-                    Spacer()
-                    Text("\(food.calories) cal")
+        ScrollView {
+            VStack(spacing: 20) {
+                
+                // Header Section
+                VStack(alignment: .leading) {
+                    Text("Calories Tracker")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.white)
+                    Text("Welcome back, \(appState.userProfile.name)")
+                        .font(.title2)
+                        .foregroundColor(.white)
                 }
-            }
-            .listStyle(PlainListStyle())
-            
-            Button(action: {
-                appState.addCalories(500)  // Add calories to the daily total
-            }) {
-                Text("Add 500 Calories")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            
-            Text("Total Calories Today: \(appState.dailyCalories)")
                 .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding(.horizontal)
+
+                // Food Sections
+                VStack(spacing: 16) {
+                    FoodSectionView(title: "Breakfast", foods: appState.foodData.breakfast)
+                    FoodSectionView(title: "Lunch", foods: appState.foodData.lunch)
+                    FoodSectionView(title: "Dinner", foods: appState.foodData.dinner)
+                }
+                .padding(.horizontal)
+
+                // Progress Circles Section
+                HStack(spacing: 20) {
+                    ProgressCircleView(
+                        progress: appState.dailyCalories / appState.userProfile.calorieGoal,
+                        label: "Calories",
+                        color: .green
+                    )
+                    ProgressCircleView(
+                        progress: appState.dailyProtein / appState.userProfile.proteinGoal,
+                        label: "Protein",
+                        color: .red
+                    )
+                }
+                .padding()
+            }
         }
     }
 }
