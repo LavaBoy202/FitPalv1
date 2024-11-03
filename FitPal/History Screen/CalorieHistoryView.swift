@@ -24,6 +24,7 @@ struct CalorieHistoryView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            
             // Timeframe Toggle
             TimeframeToggle(selectedTimeframe: $selectedTimeframe)
                 .padding(.vertical)

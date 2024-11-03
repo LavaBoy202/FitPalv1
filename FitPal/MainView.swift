@@ -28,7 +28,7 @@ struct MainView: View {
             }
 
             NavigationView {
-                MetricsView()
+                MetricsOverviewView()
                     .navigationTitle("Metrics")
             }
             .tabItem {
