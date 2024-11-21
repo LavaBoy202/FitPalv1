@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		095A92962CEFCF8F000BFD1A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095A92952CEFCF8F000BFD1A /* GoogleService-Info.plist */; };
+		095A929A2CEFDCA0000BFD1A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 095A92992CEFDCA0000BFD1A /* FirebaseAnalytics */; };
+		095A929C2CEFDCA0000BFD1A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 095A929B2CEFDCA0000BFD1A /* FirebaseAuth */; };
+		095A929E2CEFDCA0000BFD1A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 095A929D2CEFDCA0000BFD1A /* FirebaseCore */; };
+		095A92A02CEFE21F000BFD1A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 095A929F2CEFE1E6000BFD1A /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		099BA3DB2CC9D22800DF864E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		095A92952CEFCF8F000BFD1A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		095A929F2CEFE1E6000BFD1A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		099BA3CA2CC9D22600DF864E /* FitPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		099BA3DA2CC9D22800DF864E /* FitPalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitPalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		099BA3E42CC9D22800DF864E /* FitPalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitPalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095A929A2CEFDCA0000BFD1A /* FirebaseAnalytics in Frameworks */,
+				095A929E2CEFDCA0000BFD1A /* FirebaseCore in Frameworks */,
+				095A929C2CEFDCA0000BFD1A /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,13 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		095A92982CEFDCA0000BFD1A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		099BA3C12CC9D22600DF864E = {
 			isa = PBXGroup;
 			children = (
+				095A929F2CEFE1E6000BFD1A /* .gitignore */,
 				099BA3CC2CC9D22600DF864E /* FitPal */,
 				099BA3DD2CC9D22800DF864E /* FitPalTests */,
 				099BA3E72CC9D22800DF864E /* FitPalUITests */,
 				099BA3CB2CC9D22600DF864E /* Products */,
+				095A92952CEFCF8F000BFD1A /* GoogleService-Info.plist */,
+				095A92982CEFDCA0000BFD1A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +135,9 @@
 			);
 			name = FitPal;
 			packageProductDependencies = (
+				095A92992CEFDCA0000BFD1A /* FirebaseAnalytics */,
+				095A929B2CEFDCA0000BFD1A /* FirebaseAuth */,
+				095A929D2CEFDCA0000BFD1A /* FirebaseCore */,
 			);
 			productName = FitPal;
 			productReference = 099BA3CA2CC9D22600DF864E /* FitPal.app */;
@@ -195,6 +221,9 @@
 			);
 			mainGroup = 099BA3C12CC9D22600DF864E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				095A92972CEFD072000BFD1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 099BA3CB2CC9D22600DF864E /* Products */;
 			projectDirPath = "";
@@ -212,6 +241,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095A92A02CEFE21F000BFD1A /* .gitignore in Resources */,
+				095A92962CEFCF8F000BFD1A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +583,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		095A92972CEFD072000BFD1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		095A92992CEFDCA0000BFD1A /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 095A92972CEFD072000BFD1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		095A929B2CEFDCA0000BFD1A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 095A92972CEFD072000BFD1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		095A929D2CEFDCA0000BFD1A /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 095A92972CEFD072000BFD1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 099BA3C22CC9D22600DF864E /* Project object */;
 }
