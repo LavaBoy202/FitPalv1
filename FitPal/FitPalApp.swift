@@ -18,6 +18,22 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            SignUpView()
+                .tabItem {
+                    Label("Sign Up", systemImage: "person.badge.plus")
+                }
+            
+            SignInView()
+                .tabItem {
+                    Label("Sign In", systemImage: "person.fill")
+                }
+        }
+    }
+}
+
 @main
 struct FitPalApp: App {
     @StateObject private var appState = AppState()  // Centralized state object
@@ -25,8 +41,7 @@ struct FitPalApp: App {
 
        var body: some Scene {
            WindowGroup {
-               MainView()
-                   .environmentObject(appState)  // Pass the AppState to the entire app
-           }
+                       ContentView()
+                }
        }
    }
