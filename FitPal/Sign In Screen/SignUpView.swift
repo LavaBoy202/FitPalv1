@@ -7,10 +7,29 @@
 
 import SwiftUI
 
+@MainActor
+final class SignUpViewModel: ObservableObject {
+    @Published var email: String = ""
+    @Published var password: String = ""
+    
+    func signUp() {
+        Task {
+            do{
+                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                print("Success")
+                print(returnedUserData)
+                
+            } catch {
+                print("Error")
+            }
+        }
+        
+    }
+}
+
 struct SignUpView: View {
     @State private var fullName: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @StateObject var viewModel = SignUpViewModel()
 
     var body: some View {
         VStack(spacing: 20) {
@@ -22,17 +41,18 @@ struct SignUpView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
 
-            TextField("Email", text: $email)
+            TextField("Email", text: $viewModel.email)
                 .keyboardType(.emailAddress)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
 
-            SecureField("Password", text: $password)
+            SecureField("Password", text: $viewModel.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
 
             Button(action: {
-                // Handle sign-up action
+                print("Authenticating user...")
+                viewModel.signUp()
             }) {
                 Text("Sign Up")
                     .frame(maxWidth: .infinity)

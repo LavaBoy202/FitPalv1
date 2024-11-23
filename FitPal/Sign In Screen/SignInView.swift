@@ -20,10 +20,9 @@ final class SignInViewModel: ObservableObject {
         
         Task {
             do{
-                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                let returnedUserData = try await AuthenticationManager.shared.signIn(email: email, password: password)
                 print("Success")
                 print(returnedUserData)
-                
             } catch {
                 print("Error")
             }
