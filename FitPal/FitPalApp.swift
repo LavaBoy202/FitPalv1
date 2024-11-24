@@ -19,29 +19,37 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 struct ContentView: View {
+    @EnvironmentObject var appState: AppState
     var body: some View {
-        TabView {
-            SignUpView()
-                .tabItem {
-                    Label("Sign Up", systemImage: "person.badge.plus")
-                }
+        if appState.isAuthenticated {
+            ProfileView()
+        }else{
+            TabView {
+                SignUpView()
+                    .tabItem {
+                        Label("Sign Up", systemImage: "person.badge.plus")
+                    }
+                
+                SignInView()
+                    .tabItem {
+                        Label("Sign In", systemImage: "person.fill")
+                    }
+            }
             
-            SignInView()
-                .tabItem {
-                    Label("Sign In", systemImage: "person.fill")
-                }
         }
+        
     }
 }
 
 @main
 struct FitPalApp: App {
-    @StateObject private var appState = AppState()  // Centralized state object
+    @StateObject private var appState = AppState()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
        var body: some Scene {
            WindowGroup {
-                       ContentView()
-                }
+                   ContentView()
+                   .environmentObject(appState)
+                       
+            }
        }
    }

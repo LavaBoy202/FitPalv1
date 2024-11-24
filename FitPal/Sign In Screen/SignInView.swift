@@ -12,7 +12,7 @@ final class SignInViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     
-    func signIn() {
+    func signIn(appState: AppState) async {
         guard !email.isEmpty, !password.isEmpty else {
             print("No email or password found.")
             return
@@ -23,6 +23,8 @@ final class SignInViewModel: ObservableObject {
                 let returnedUserData = try await AuthenticationManager.shared.signIn(email: email, password: password)
                 print("Success")
                 print(returnedUserData)
+                appState.isAuthenticated = true
+                
             } catch {
                 print("Error")
             }
@@ -33,7 +35,7 @@ final class SignInViewModel: ObservableObject {
 
 struct SignInView: View {
     @StateObject var viewModel = SignInViewModel()
-    
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         VStack(spacing: 20) {
@@ -51,7 +53,10 @@ struct SignInView: View {
                 .padding(.horizontal)
 
             Button(action: {
-                viewModel.signIn()
+                Task {
+                    await viewModel.signIn(appState : appState) // appState: appState to avoid ambiguity
+                }
+                
             }) {
                 Text("Sign In")
                     .frame(maxWidth: .infinity)

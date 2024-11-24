@@ -12,13 +12,15 @@ final class SignUpViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     
-    func signUp() {
+    func signUp(appState: AppState) async{
         Task {
             do{
                 let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
                 print("Success")
                 print(returnedUserData)
-                
+
+                try await AuthenticationManager.shared.signIn(email: email, password: password)
+                appState.isAuthenticated = true
             } catch {
                 print("Error")
             }
@@ -30,6 +32,7 @@ final class SignUpViewModel: ObservableObject {
 struct SignUpView: View {
     @State private var fullName: String = ""
     @StateObject var viewModel = SignUpViewModel()
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         VStack(spacing: 20) {
@@ -52,7 +55,9 @@ struct SignUpView: View {
 
             Button(action: {
                 print("Authenticating user...")
-                viewModel.signUp()
+                Task {
+                    await viewModel.signUp(appState : appState) // appState: appState to avoid ambiguity
+                }
             }) {
                 Text("Sign Up")
                     .frame(maxWidth: .infinity)

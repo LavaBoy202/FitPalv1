@@ -22,6 +22,7 @@ class AppState: ObservableObject {
     @Published var dailyCalories: Double = 1500  // Example calorie intake
     @Published var dailyProtein: Double = 75     // Example protein intake
     @Published var streakDays: Int = 5
+    @Published var isAuthenticated: Bool = false
 }
 
 
