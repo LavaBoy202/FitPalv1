@@ -33,4 +33,11 @@ final class AuthenticationManager {
         let authDataResult = try await FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password)
         return AuthDataResultModel(user: authDataResult.user)
     }
+    func signOut() throws {
+        do{
+            try Auth.auth().signOut()
+        }catch {
+            print("Error signing out: \(error.localizedDescription)")
+        }
+    }
 }

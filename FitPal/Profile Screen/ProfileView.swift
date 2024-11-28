@@ -10,9 +10,18 @@ import SwiftUI
 
 import SwiftUI
 
+@MainActor
+final class ProfileViewModel: ObservableObject {
+    func signOut(appState: AppState) throws {
+        try AuthenticationManager.shared.signOut()
+        appState.isAuthenticated = false
+    }
+}
+
 struct ProfileView: View {
     @EnvironmentObject var appState: AppState  // Accessing the user's profile from a shared state
     @State private var isEditing = false
+    @StateObject var viewModel = ProfileViewModel()
     
     var body: some View {
         VStack {
@@ -57,6 +66,23 @@ struct ProfileView: View {
                            Text(isEditing ? "Save" : "Edit Profile")
                                .padding()
                                .background(Color.blue)
+                               .foregroundColor(.white)
+                               .cornerRadius(10)
+                       }
+            
+            Button(action: {
+                Task {
+                    do {
+                        try  viewModel.signOut(appState: appState)
+                    }catch {
+                        print(error)
+                        
+                    }
+                }
+                       }) {
+                           Text("Logout")
+                               .padding()
+                               .background(Color.red)
                                .foregroundColor(.white)
                                .cornerRadius(10)
                        }
