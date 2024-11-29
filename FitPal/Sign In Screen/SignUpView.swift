@@ -38,7 +38,7 @@ final class SignUpViewModel: ObservableObject {
                 let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
                 print("Success")
                 print(returnedUserData)
-
+                saveUserToFirestore(authResult: returnedUserData)
                 try await AuthenticationManager.shared.signIn(email: email, password: password)
                 appState.isAuthenticated = true
             } catch {
