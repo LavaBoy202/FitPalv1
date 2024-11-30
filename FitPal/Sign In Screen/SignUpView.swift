@@ -41,6 +41,12 @@ final class SignUpViewModel: ObservableObject {
                 saveUserToFirestore(authResult: returnedUserData)
                 try await AuthenticationManager.shared.signIn(email: email, password: password)
                 appState.isAuthenticated = true
+                let uid = returnedUserData.uid
+                if let user = await fetchUser(uid: uid) {
+                    print("User fetched: \(user)")
+                } else {
+                    print("User not found or an error occurred")
+                }
             } catch {
                 print("Error")
             }
