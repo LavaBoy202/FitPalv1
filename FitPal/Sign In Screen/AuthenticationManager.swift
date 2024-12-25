@@ -10,11 +10,13 @@ import FirebaseAuth
 
 struct AuthDataResultModel {
     let uid: String
+    let displayName: String?
     let email: String?
     let photUrl: String?
     
     init(user: User){
         self.uid = user.uid
+        self.displayName = user.displayName
         self.email = user.email
         self.photUrl = user.photoURL?.absoluteString
     }
@@ -27,8 +29,11 @@ final class AuthenticationManager {
     
     
     
-    func createUser(email: String, password: String) async throws -> AuthDataResultModel {
+    func createUser(email: String, password: String, name: String) async throws -> AuthDataResultModel {
         let authDataResult = try await FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password)
+        let changeRequest = authDataResult.user.createProfileChangeRequest()
+        changeRequest.displayName = name
+        try await changeRequest.commitChanges()
         return AuthDataResultModel(user: authDataResult.user)
     }
     func signIn(email: String, password: String) async throws -> AuthDataResultModel {

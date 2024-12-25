@@ -43,6 +43,8 @@ final class SignInViewModel: ObservableObject {
                 print("Success")
                 print(returnedUserData)
                 appState.isAuthenticated = true
+                appState.userProfile.email = returnedUserData.email ?? "null@gmail.com"
+                appState.userProfile.name = returnedUserData.displayName ?? "null"
                 
             } catch {
                 print("Error")
