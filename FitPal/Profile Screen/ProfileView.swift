@@ -25,10 +25,6 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            if isEditing {
-                            ProfileEditView(profile: $appState.userProfile)
-                        }
-            else{
                 HStack {
                     VStack(alignment: .leading) {
                         Text(appState.userProfile.email)
@@ -58,18 +54,6 @@ struct ProfileView: View {
                     ProfileItemRow(iconName: "flame", title: "Daily Calorie Goal", value: "\(appState.userProfile.calorieGoal) cal")
                 }
                 .listStyle(InsetGroupedListStyle())
-                
-            }
-            Button(action: {
-                           isEditing.toggle()
-                       }) {
-                           Text(isEditing ? "Save" : "Edit Profile")
-                               .padding()
-                               .background(Color.blue)
-                               .foregroundColor(.white)
-                               .cornerRadius(10)
-                       }
-            
             Button(action: {
                 Task {
                     do {
@@ -86,6 +70,9 @@ struct ProfileView: View {
                                .foregroundColor(.white)
                                .cornerRadius(10)
                        }
-        }
+                
+            }
+            
+        
     }
 }

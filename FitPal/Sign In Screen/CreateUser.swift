@@ -14,8 +14,7 @@ func saveUserToFirestore(authResult: AuthDataResultModel) {
     
     let uid = authResult.uid
     let email = authResult.email ?? "No email"
-    let firstName = ""
-    let lastName = ""
+    let name = ""
     let goalCalories = 0
     let goalWeight = 0
     let weight = 0
@@ -25,8 +24,7 @@ func saveUserToFirestore(authResult: AuthDataResultModel) {
     let userData: [String: Any] = [
         "uid": uid,
         "email": email,
-        "firstName": firstName,
-        "lastName": lastName,
+        "name": name,
         "goalCalories": goalCalories,
         "goalWeight": goalWeight,
         "weight": weight,

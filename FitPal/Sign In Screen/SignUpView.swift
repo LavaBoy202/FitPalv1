@@ -11,6 +11,7 @@ import SwiftUI
 final class SignUpViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var fullName: String = ""
     
     func signUp(appState: AppState) async{
         // Check if the password is at least 6 characters long
@@ -35,12 +36,14 @@ final class SignUpViewModel: ObservableObject {
         
         Task {
             do{
-                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password, name: fullName)
                 print("Success")
                 print(returnedUserData)
                 saveUserToFirestore(authResult: returnedUserData)
                 try await AuthenticationManager.shared.signIn(email: email, password: password)
                 appState.isAuthenticated = true
+                appState.userProfile.email = returnedUserData.email ?? "null@gmail.com"
+                appState.userProfile.name = returnedUserData.displayName ?? "null"
                 let uid = returnedUserData.uid
                 if let user = await fetchUser(uid: uid) {
                     print("User fetched: \(user)")
@@ -56,7 +59,6 @@ final class SignUpViewModel: ObservableObject {
 }
 
 struct SignUpView: View {
-    @State private var fullName: String = ""
     @StateObject var viewModel = SignUpViewModel()
     @EnvironmentObject var appState: AppState
 
@@ -66,7 +68,7 @@ struct SignUpView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            TextField("Full Name", text: $fullName)
+            TextField("Full Name", text: $viewModel.fullName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
 
