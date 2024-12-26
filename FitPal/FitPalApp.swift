@@ -24,6 +24,15 @@ struct ContentView: View {
         if appState.isOnBoarding {
             OnboardingFlow(appState: appState, onComplete: {
                 appState.isOnBoarding = false
+                
+                Task {
+                    if let user = await fetchUser(uid: appState.userProfile.uid) {
+                        
+                        print("User fetched: \(user)")
+                    } else {
+                        print("User not found or an error occurred")
+                    }
+                }
                 appState.isAuthenticated = true
             })
         }
