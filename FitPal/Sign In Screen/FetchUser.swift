@@ -8,15 +8,18 @@
 import FirebaseFirestore
 
 func fetchUser(uid: String) async -> UserModel? {
+    print(uid)
     let db = Firestore.firestore()
     let docRef = db.collection("User").document(uid)
     
     do {
         let document = try await docRef.getDocument()
         if document.exists, let userData = document.data() {
-            print(userData)
+            //print(userData)
+            print("document exists")
             return UserModel(userData: userData)
         }else{
+            print("null")
             return nil
         }
     }catch{

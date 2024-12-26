@@ -21,10 +21,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     var body: some View {
-        if appState.isAuthenticated {
+        if appState.isOnBoarding {
+            OnboardingFlow(appState: appState, onComplete: {
+                appState.isOnBoarding = false
+                
+                Task {
+                    if let user = await fetchUser(uid: appState.userProfile.uid) {
+                        
+                        print("User fetched: \(user)")
+                    } else {
+                        print("User not found or an error occurred")
+                    }
+                }
+                appState.isAuthenticated = true
+            })
+        }
+        else if appState.isAuthenticated {
             MainView()
                 .environmentObject(appState)
-        }else{
+        }
+        else{
             TabView {
                 SignUpView()
                     .tabItem {

@@ -39,17 +39,15 @@ final class SignUpViewModel: ObservableObject {
                 let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password, name: fullName)
                 print("Success")
                 print(returnedUserData)
-                saveUserToFirestore(authResult: returnedUserData)
-                try await AuthenticationManager.shared.signIn(email: email, password: password)
-                appState.isAuthenticated = true
+                appState.userProfile.uid = returnedUserData.uid
                 appState.userProfile.email = returnedUserData.email ?? "null@gmail.com"
                 appState.userProfile.name = returnedUserData.displayName ?? "null"
+                appState.isOnBoarding = true
                 let uid = returnedUserData.uid
-                if let user = await fetchUser(uid: uid) {
-                    print("User fetched: \(user)")
-                } else {
-                    print("User not found or an error occurred")
-                }
+                print("BABUUUU")
+                
+                try await AuthenticationManager.shared.signIn(email: email, password: password)
+                
             } catch {
                 print("Error")
             }
