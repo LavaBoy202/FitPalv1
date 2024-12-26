@@ -25,8 +25,7 @@ This iOS app helps users easily track their daily calorie intake through meals, 
 -   **Streak Tracking**: Show how many consecutive days the user stayed within their calorie goal.
 -   **Weight Projection**: Based on the current week's calorie intake, estimate how much weight the user might lose or gain.
 
-## 4. Profile Page
-
+## 4. Profile Page ✅
 **User Information**: Store and display key user details, such as:
 
 -   Name
