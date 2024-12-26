@@ -21,10 +21,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     var body: some View {
-        if appState.isAuthenticated {
+        if appState.isOnBoarding {
+            OnboardingFlow(appState: appState, onComplete: {
+                appState.isOnBoarding = false
+                appState.isAuthenticated = true
+            })
+        }
+        else if appState.isAuthenticated {
             MainView()
                 .environmentObject(appState)
-        }else{
+        }
+        else{
             TabView {
                 SignUpView()
                     .tabItem {
