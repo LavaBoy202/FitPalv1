@@ -34,12 +34,12 @@ struct CaloriesTrackerView: View {
                 // Progress Circles Section
                 HStack(spacing: 20) {
                     ProgressCircleView(
-                        progress: appState.dailyCalories / appState.userProfile.calorieGoal,
+                        progress: appState.dailyCalories / Double(appState.userProfile.goalCalories),
                         label: "Calories",
                         color: .green
                     )
                     ProgressCircleView(
-                        progress: appState.dailyProtein / appState.userProfile.proteinGoal,
+                        progress: appState.dailyProtein / 100,
                         label: "Protein",
                         color: .red
                     )

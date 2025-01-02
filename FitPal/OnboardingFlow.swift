@@ -57,10 +57,10 @@ struct OnboardingFlow: View {
         let db = Firestore.firestore()
         appState.userProfile.height = Double(height) ?? 0
         appState.userProfile.goalWeight = Double(goalWeight) ?? 0.0
-        appState.userProfile.calorieGoal = Double(goalCalories) ?? 0.0
+        appState.userProfile.goalCalories = Int(Double(goalCalories) ?? 0.0)
 
         // For weight (if it should be a numeric value)
-        appState.userProfile.currentWeight = Double(weight) ?? 0.0
+        appState.userProfile.weight = Double(weight) ?? 0.0
         // Save the user data in the 'User' collection with the UID as the document ID
         db.collection("User").document(appState.userProfile.uid).setData(userData) { error in
             if let error = error {

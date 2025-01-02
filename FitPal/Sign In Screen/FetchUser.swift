@@ -15,8 +15,9 @@ func fetchUser(uid: String) async -> UserModel? {
     do {
         let document = try await docRef.getDocument()
         if document.exists, let userData = document.data() {
-            //print(userData)
+            print(userData)
             print("document exists")
+            print(UserModel(userData: userData))
             return UserModel(userData: userData)
         }else{
             print("null")

@@ -49,9 +49,9 @@ struct ProfileView: View {
                 .padding()
                 List {
                     ProfileItemRow(iconName: "ruler", title: "Height", value: "\(appState.userProfile.height) cm")
-                    ProfileItemRow(iconName: "scalemass", title: "Current Weight", value: "\(appState.userProfile.currentWeight) kg")
+                    ProfileItemRow(iconName: "scalemass", title: "Current Weight", value: "\(appState.userProfile.weight) kg")
                     ProfileItemRow(iconName: "target", title: "Goal Weight", value: "\(appState.userProfile.goalWeight) kg")
-                    ProfileItemRow(iconName: "flame", title: "Daily Calorie Goal", value: "\(appState.userProfile.calorieGoal) cal")
+                    ProfileItemRow(iconName: "flame", title: "Daily Calorie Goal", value: "\(appState.userProfile.goalCalories) cal")
                 }
                 .listStyle(InsetGroupedListStyle())
             Button(action: {

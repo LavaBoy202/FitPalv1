@@ -18,6 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     var body: some View {
@@ -39,6 +40,16 @@ struct ContentView: View {
         else if appState.isAuthenticated {
             MainView()
                 .environmentObject(appState)
+                .onAppear {
+                    Task {
+                        if let user = await fetchUser(uid: appState.userProfile.uid) {
+                            appState.userProfile = user
+                            print("User fetched: \(user.weight)")
+                        } else {
+                            print("User not found or an error occurred")
+                        }
+                    }
+                }
         }
         else{
             TabView {

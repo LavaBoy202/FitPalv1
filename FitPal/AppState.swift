@@ -8,7 +8,7 @@
 import SwiftUI
 
 class AppState: ObservableObject {
-    @Published var userProfile = UserProfile()
+    @Published var userProfile = UserModel()
     @Published var foodData = FoodData()  // Initialize food data here
     @Published var dailyCalories: Double = 1500  // Example calorie intake
     @Published var dailyProtein: Double = 75     // Example protein intake

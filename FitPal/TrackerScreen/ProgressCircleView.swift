@@ -26,10 +26,10 @@ struct ProgressCircleView: View {
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.easeInOut)
                 
-                Text("\(Int(progress * 100))%")
-                    .font(.title2)
-                    .bold()
-                    .foregroundColor(color)
+//                Text("\(Int(progress * 100))%")
+//                    .font(.title2)
+//                    .bold()
+//                    .foregroundColor(color)
             }
             .frame(width: 100, height: 100)
 
